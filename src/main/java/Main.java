@@ -23,10 +23,10 @@ public class Main {
                 }
             }
         }
-        if (args.length % 2 == 0) {
-            System.out.println("The number of parameters is even!");
-        }else if(args.length <= 2){
+        if(args.length < 2){
             System.out.println("Not enough parameters!");
+        }else if (args.length % 2 == 0) {
+            System.out.println("The number of parameters is even!");
         }else if(isDuplicate){
             System.out.println("Parameters are duplicated!");
         }
@@ -37,6 +37,8 @@ public class Main {
                 Integer computerMove = Computermove(args.length);
                 k = 1;
                 System.out.println("HMAC: " + Hmac.hmacSha(key, args[computerMove]));
+                System.out.println("Available moves: \n");
+
                 for (String str : args) {
                     System.out.println(k + " - " + str);
                     k++;
@@ -57,12 +59,12 @@ public class Main {
                         Rules.winner(winner);
 
                         System.out.println("HMAC key: " + key + '\n');
-                        break;
+                        System.exit(0);
                     } else if (move.equals("0")) {
                         System.exit(0);
                     } else if (move.equals("?")) {
                         table.createTable(args.length, args);
-                        break;
+                        System.exit(0);
                     }
                 }
             }
