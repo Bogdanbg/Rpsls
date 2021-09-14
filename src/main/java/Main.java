@@ -1,5 +1,6 @@
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +13,24 @@ public class Main {
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
         Scanner in = new Scanner(System.in);
-        if (args.length % 2 != 0) {
+        int length = args.length;
+        boolean isDuplicate = false;
+        for (int i = 0; i < length; i++){
+            for (int j = i + 1; j < length; j++){
+                if (Objects.equals(args[i], args[j])) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+        }
+        if (args.length % 2 == 0) {
+            System.out.println("The number of parameters is even!");
+        }else if(args.length <= 2){
+            System.out.println("Not enough parameters!");
+        }else if(isDuplicate){
+            System.out.println("Parameters are duplicated!");
+        }
+        else{
             while (true) {
 
                 String key = Hmac.GenerateKey();
@@ -49,6 +67,5 @@ public class Main {
                 }
             }
         }
-        else System.out.println("Invalid input!");
     }
 }
